@@ -13,6 +13,7 @@ services:
       - web_3
     networks:
       - proxy_net
+    restart: always
 
   web_1:
     image: nginx:latest
@@ -20,6 +21,7 @@ services:
       - proxy_net
     labels:
       - "com.docker.compose.service=web_1"
+    restart: unless-stopped
     
     volumes:
       - /home/ubuntu/index_html/Task_2/index1.html:/usr/share/nginx/html/index.html
@@ -32,6 +34,7 @@ services:
       - "com.docker.compose.service=backend2"
     volumes:
       - /home/ubuntu/index_html/Task_2/index2.html:/usr/share/nginx/html/index.html
+    restart: unless-stopped
   
   web_3:
     image: nginx:latest
@@ -41,6 +44,7 @@ services:
       - "com.docker.compose.service=backend3"
     volumes:
       - /home/ubuntu/index_html/Task_2/index3.html:/usr/share/nginx/html/index.html
+    restart: unless-stopped
 
 networks:
   proxy_net:
